@@ -1,3 +1,7 @@
+@{
+    string? city = ViewData["City"] as string;
+}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,21 +9,40 @@
         <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <title>WeatherApp</title>
 
-        <div class="bg-info p-2">
-            <span class="navbar">WeatherApp</span>
-        </div>
+        <nav class="navbar bg-body-tertiary border-bottom text-center">
+            <div class="container-fluid" style="display: flex; justify-content: center; align-items: center">
+                <a class="navbar-brand" href="/">WeatherApp</a>
+            </div>
+        </nav>
+
     </head>
     <body>
-        <div class="container-fluid p-2">
-            <main role="main">
-                @RenderBody()
-            </main>
+    
+    <div class="container-fluid p-2">
+        <div class = "container col-5">
+            <form asp-action="Search" asp-controller="Home" method="get">
+                <div class="d-flex justify-content-center p-2">
+                    <div class="input-group col-5">
+                        <input name="city" type="text" class="form-control" placeholder="Enter the city name"
+                            aria-label="Enter the city name" aria-describedby="button-search" value="@city" autocomplete="off"/>
+
+                        <button class="btn btn-outline-secondary" type="submit" id="button-search" data-mdb-ripple-color="dark">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
 
-        <footer class="footer border-top text-muted p-2 text-center" style="position: fixed; bottom: 0; width: 100%;> 
+        <main role="main" class="container p-2" style="margin-bottom: 60px;">
+            @RenderBody()
+        </main>
+        </div>
+
+        <footer class="footer fixed-bottom border-top text-muted p-2 text-center bg-body-tertiary"> 
             <div class="container-fluid">
                 &copy; 2023 - WeatherApp
-                <p>
+                <p style="margin-bottom: 0;">
                     <a href="https://github.com/ShadowPrice1328/WeatherApp" class="text-decoration-none">GitHub</a>
                 </p>
             </div>
