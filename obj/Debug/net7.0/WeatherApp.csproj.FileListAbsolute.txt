@@ -28,3 +28,6 @@
 /home/anna/development/projects/WeatherApp/bin/Debug/net7.0/WeatherApp.staticwebassets.runtime.json
 /home/anna/development/projects/WeatherApp/obj/Debug/net7.0/WeatherApp.RazorAssemblyInfo.cache
 /home/anna/development/projects/WeatherApp/obj/Debug/net7.0/WeatherApp.RazorAssemblyInfo.cs
+/home/anna/development/projects/WeatherApp/bin/Debug/net7.0/Newtonsoft.Json.dll
+/home/anna/development/projects/WeatherApp/obj/Debug/net7.0/WeatherApp.csproj.AssemblyReference.cache
+/home/anna/development/projects/WeatherApp/obj/Debug/net7.0/WeatherApp.csproj.CopyComplete

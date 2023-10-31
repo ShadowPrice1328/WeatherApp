@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Models
+namespace WeatherApp.Models
 {
     public class Rain
     {

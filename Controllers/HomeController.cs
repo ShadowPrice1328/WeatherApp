@@ -1,10 +1,17 @@
-using Config;
+using WeatherApp.Config;
 using Microsoft.AspNetCore.Mvc;
+using WeatherApp.Models;
+using WeatherApp.Services;
 
-namespace Controllers 
+namespace WeatherApp.Controllers 
 {
     public class HomeController : Controller
     {
+        private readonly IApiService _apiservice;
+        public HomeController(IApiService apiservice)
+        {
+            _apiservice = apiservice;
+        }
         public IActionResult Index()
         {
             return View();
@@ -16,21 +23,11 @@ namespace Controllers
             if (!string.IsNullOrEmpty(city))
             {
                 city = city.Trim();
-
                 ViewData["City"] = city;
 
-                const string appid = Constants.OPEN_WEATHER_APP_ID;
+                // WeatherResponse weather = await _apiservice.GetWeatherResponse(city);
 
-                string url = $"http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={appid}&units=metric";
-                string responseBody = string.Empty;
-
-                using (HttpClient client = new())
-                {
-                    HttpResponseMessage response = await client.GetAsync(url);
-                    response.EnsureSuccessStatusCode();
-                    responseBody = await response.Content.ReadAsStringAsync();
-                }
-                return View("Index", responseBody);
+                return View("Index", await _apiservice.GetJsonResponse(city));
             }
             else
             {
