@@ -1,10 +1,15 @@
 @model IGrouping<DateTime, List>
 
 <div class="card">
-    <img class="card-img-right" src="" alt="Card image">
-    <h3>@Model.Key.Day</h3>
-    @{foreach (var item in Model)
-    {
-        <p>@item.main.temp.ToString() °C</p>
-    }}
+    <div class="card-body text-center">
+        @* <img class="card-img-right" src="" alt="/Weather image/"> *@
+        <h3>@Model.Key.ToString("m")</h3>
+        @{foreach (var item in Model)
+        {
+            <p>
+                <span class="text-secondary">@DateTime.ParseExact(item.dt_txt, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToString("HH:ss")</span>
+                | @item.main.temp.ToString() °C
+            </p>
+        }}
+    </div>
 </div>
