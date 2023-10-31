@@ -2,6 +2,7 @@ using WeatherApp.Config;
 using Microsoft.AspNetCore.Mvc;
 using WeatherApp.Models;
 using WeatherApp.Services;
+using System.Globalization;
 
 namespace WeatherApp.Controllers 
 {
@@ -14,7 +15,7 @@ namespace WeatherApp.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Search", new {city = "Kyiv"});
         }
         [Route("{city}")]
         [Route("Home/Search")]
@@ -25,9 +26,12 @@ namespace WeatherApp.Controllers
                 city = city.Trim();
                 ViewData["City"] = city;
 
-                // WeatherResponse weather = await _apiservice.GetWeatherResponse(city);
+                WeatherResponse weather = await _apiservice.GetWeatherResponse(city);
+                
+                var FiveDaysWeather = weather.list.GroupBy(item => DateTime.ParseExact(item.dt_txt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).Date);
 
-                return View("Index", await _apiservice.GetJsonResponse(city));
+                // return View("Index", await _apiservice.GetJsonResponse(city));
+                return View("Index", FiveDaysWeather);
             }
             else
             {

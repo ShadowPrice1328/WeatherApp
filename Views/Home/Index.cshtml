@@ -1,3 +1,10 @@
-@model string;
+@model IEnumerable<IGrouping<DateTime, List>>;
 
-<p>@Model</p>
+<div class="container">
+    <div class="card-group">
+        @{foreach (var weatherItem in Model)
+        {
+            await Html.RenderPartialAsync("FiveDays", weatherItem);
+        }}
+    </div>
+</div>

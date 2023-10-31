@@ -1,0 +1,10 @@
+@model IGrouping<DateTime, List>
+
+<div class="card">
+    <img class="card-img-right" src="" alt="Card image">
+    <h3>@Model.Key.Day</h3>
+    @{foreach (var item in Model)
+    {
+        <p>@item.main.temp.ToString() °C</p>
+    }}
+</div>
