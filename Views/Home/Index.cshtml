@@ -4,7 +4,32 @@
     <div class="card-group">
         @{foreach (var weatherItem in Model)
         {
-            await Html.RenderPartialAsync("FiveDays", weatherItem);
+            <form asp-action="ShowDetails" asp-controller="Home" method="post">
+                <input type="hidden" name="date" value="@weatherItem.Key.ToString("yyyy-MM-dd")" />
+                <input type="hidden" name="city" value="@ViewData["City"]"/>
+                <div class="card" style="cursor: pointer;" onclick="this.parentNode.submit();">
+                    <div class="card-body text-center">
+                        <h3 class="border-bottom">@weatherItem.Key.ToString("m")</h3>
+                    </div>
+                </div>
+            </form>
         }}
+    </div>
+
+    <div class="container p-2">
+        @if (ViewData.ContainsKey("selectedDay"))
+        {
+            TempData["selectedDay"] = ViewData["selectedDay"];
+            var selectedModel = Model
+            .SelectMany(group => group)
+            .GroupBy(item => DateTime.ParseExact(item.dt_txt, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).Date)
+            .FirstOrDefault(group => group.Key == DateTime.ParseExact(ViewData["selectedDay"] as string, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date);
+            @await Component.InvokeAsync("DayDetails", selectedModel)
+        }
+        else
+        {
+            var selectedModel = Model.First();
+            @await Component.InvokeAsync("DayDetails", selectedModel)   
+        }
     </div>
 </div>

@@ -1,0 +1,10 @@
+@model IGrouping<DateTime, List>;
+
+@{
+    <h2 class="text-success">@Model.Key.ToString("m")</h2>
+    foreach (var weather in Model)
+    {
+        <p class="text-secondary">@weather.dt_txt |</p>
+        <p>Feels like: @weather.main.feels_like</p>
+    }
+}

@@ -60,11 +60,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/anna/development/projects/WeatherApp/WeatherApp.csproj",
+      "projectUniqueName": "/home/anna/development/projects/WeatherApp (copy)/WeatherApp.csproj",
       "projectName": "WeatherApp",
-      "projectPath": "/home/anna/development/projects/WeatherApp/WeatherApp.csproj",
+      "projectPath": "/home/anna/development/projects/WeatherApp (copy)/WeatherApp.csproj",
       "packagesPath": "/home/anna/.nuget/packages/",
-      "outputPath": "/home/anna/development/projects/WeatherApp/obj/",
+      "outputPath": "/home/anna/development/projects/WeatherApp (copy)/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/anna/.nuget/NuGet/NuGet.Config"

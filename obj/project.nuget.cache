@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SJ8kShOzhpHGMiDMDJC/EgHFwm2b8lYou6w+bNIpv7SPD/NUZ9wLI/e1OlxRpA3KzdlB/lIR26MhY+3N2o5Ucw==",
+  "dgSpecHash": "LfIIVpdcrWxAMqaWYU5K7rxOf9NzIZKW/eK4MPZFdNv0a81MZpckdIx1ZgoTKsuzHZchz3Hhlpo68ozBBjUW0w==",
   "success": true,
-  "projectFilePath": "/home/anna/development/projects/WeatherApp/WeatherApp.csproj",
+  "projectFilePath": "/home/anna/development/projects/WeatherApp (copy)/WeatherApp.csproj",
   "expectedPackageFiles": [
     "/home/anna/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
   ],
