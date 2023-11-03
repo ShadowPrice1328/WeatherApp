@@ -1,22 +1,20 @@
 @model IEnumerable<IGrouping<DateTime, List>>;
 
-<div class="container">
-    <div class="card-group">
-        @{foreach (var weatherItem in Model)
-        {
-            <form asp-action="ShowDetails" asp-controller="Home" method="post">
-                <input type="hidden" name="date" value="@weatherItem.Key.ToString("yyyy-MM-dd")" />
-                <input type="hidden" name="city" value="@ViewData["City"]"/>
-                <div class="card" style="cursor: pointer;" onclick="this.parentNode.submit();">
-                    <div class="card-body text-center">
-                        <h3 class="border-bottom">@weatherItem.Key.ToString("m")</h3>
-                    </div>
-                </div>
-            </form>
-        }}
+<div class = "container p-2">
+    <div class="d-flex justify-content-center">
+        <div class="card-group" style="white-space: nowrap;">
+            @{foreach (var weatherItem in Model)
+            {
+                <form asp-action="ShowDetails" asp-controller="Home" method="post">
+                    <input type="hidden" name="date" value="@weatherItem.Key.ToString("yyyy-MM-dd")" />
+                    <input type="hidden" name="city" value="@ViewData["City"]"/>
+                    @await Component.InvokeAsync("DayIcon", new { date = weatherItem.Key, iconUrl = weatherItem.First().weather.First().icon})
+                </form>
+            }}
+        </div>
     </div>
 
-    <div class="container p-2">
+    <div style="margin-left: 20%; margin-top: 15px;">
         @if (ViewData.ContainsKey("selectedDay"))
         {
             TempData["selectedDay"] = ViewData["selectedDay"];

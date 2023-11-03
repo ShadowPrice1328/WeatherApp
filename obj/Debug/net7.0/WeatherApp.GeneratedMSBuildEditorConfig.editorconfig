@@ -24,6 +24,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvRGF5RGV0YWlscy9EZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/anna/development/projects/WeatherApp (copy)/Views/Shared/Components/DayIcon/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvRGF5SWNvbi9EZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/anna/development/projects/WeatherApp (copy)/Views/Shared/FiveDays.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0ZpdmVEYXlzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

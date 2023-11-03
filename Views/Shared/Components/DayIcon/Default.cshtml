@@ -1,0 +1,10 @@
+@model DayViewModel
+
+<div class="card" style="cursor: pointer; line-height: 1; width:8rem" onclick="this.parentNode.submit();">
+    <div class="card-body text-center">
+        <p style="margin-bottom: 10px;">@Model.Date.ToString("dddd")</p>
+        <b>@Model.Date.ToString("dd")</b>
+        <p style="margin-bottom: 2px; margin-top: 7px;">@Model.Date.ToString("MMMM")</p>
+        <img class="card-img-bottom border-top" src="@Model.IconUrl" alt="weather icon">
+    </div>
+</div>
