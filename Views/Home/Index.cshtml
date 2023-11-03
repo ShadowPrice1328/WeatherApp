@@ -8,7 +8,7 @@
                 <form asp-action="ShowDetails" asp-controller="Home" method="post">
                     <input type="hidden" name="date" value="@weatherItem.Key.ToString("yyyy-MM-dd")" />
                     <input type="hidden" name="city" value="@ViewData["City"]"/>
-                    @await Component.InvokeAsync("DayIcon", new { date = weatherItem.Key, iconUrl = weatherItem.First().weather.First().icon})
+                    @await Component.InvokeAsync("DayIcon", new { item = weatherItem})
                 </form>
             }}
         </div>
