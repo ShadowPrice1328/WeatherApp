@@ -1,10 +1,58 @@
-@model IGrouping<DateTime, List>;
+@using System.Globalization
+@model IGrouping<DateTime, List>
+
+<h2 class="">@Model.Key.ToString("MMMM dd, yyyy")</h2>
+<table class="table table-bordered table-responsive text-center">
+    <thead>
+        <tr>
+            <th>Time</th>
+            <th>Temperature (&#8451;)</th>
+            <th>Feels Like (&#8451;)</th>
+            <th>Pressure (mm)</th>
+            <th>Humidity (%)</th>
+            <th>Wind (m/s)</th>
+            <th>Probability of precipitation (%)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var weather in Model)
+        {
+            <tr>
+                <td>@DateTime.ParseExact(weather.dt_txt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).ToString("HH:mm")</td>
+                <td>@weather.main.temp</td>
+                <td>@weather.main.feels_like</td>
+                <td>@weather.main.pressure</td>
+                <td>@weather.main.humidity</td>
+                <td>@GetWindDirection(weather.wind.deg), @weather.wind.speed</td>
+                <td>@Convert.ToInt32(weather.pop*100)</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 @{
-    <h2 class="text-success">@Model.Key.ToString("m")</h2>
-    foreach (var weather in Model)
+    static string GetWindDirection(double deg)
     {
-        <p class="text-secondary">@weather.dt_txt |</p>
-        <p>Feels like: @weather.main.feels_like</p>
+        switch (true)
+        {
+            case var expression when deg > 337.5:
+                return "Northerly";
+            case var expression when deg > 292.5:
+                return "North Westerly";
+            case var expression when deg > 247.5:
+                return "Westerly";
+            case var expression when deg > 202.5:
+                return "South Westerly";
+            case var expression when deg > 157.5:
+                return "Southerly";
+            case var expression when deg > 122.5:
+                return "South Easterly";
+            case var expression when deg > 67.5:
+                return "Easterly";
+            case var expression when deg > 22.5:
+                return "North Easterly";
+            default:
+                return "Northerly";
+        }
     }
 }
