@@ -8,6 +8,9 @@ Config/
 # Logs
 Logs/
 
+# Bootstrap
+wwwroot/lib/bootstrap/
+
 # Generated files
 project.lock.json
 .vs/
