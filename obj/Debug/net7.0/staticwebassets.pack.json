@@ -1,6 +1,78 @@
 {
   "Files": [
     {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/01d.png",
+      "PackagePath": "staticwebassets/images/01d.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/01n.png",
+      "PackagePath": "staticwebassets/images/01n.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/02d.png",
+      "PackagePath": "staticwebassets/images/02d.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/02n.png",
+      "PackagePath": "staticwebassets/images/02n.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/03d.png",
+      "PackagePath": "staticwebassets/images/03d.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/03n.png",
+      "PackagePath": "staticwebassets/images/03n.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/04d.png",
+      "PackagePath": "staticwebassets/images/04d.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/04n.png",
+      "PackagePath": "staticwebassets/images/04n.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/09d.png",
+      "PackagePath": "staticwebassets/images/09d.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/09n.png",
+      "PackagePath": "staticwebassets/images/09n.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/10d.png",
+      "PackagePath": "staticwebassets/images/10d.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/10n.png",
+      "PackagePath": "staticwebassets/images/10n.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/11d.png",
+      "PackagePath": "staticwebassets/images/11d.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/11n.png",
+      "PackagePath": "staticwebassets/images/11n.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/13d.png",
+      "PackagePath": "staticwebassets/images/13d.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/13n.png",
+      "PackagePath": "staticwebassets/images/13n.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/50d.png",
+      "PackagePath": "staticwebassets/images/50d.png"
+    },
+    {
+      "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/images/50n.png",
+      "PackagePath": "staticwebassets/images/50n.png"
+    },
+    {
       "Id": "/home/anna/development/projects/WeatherApp (copy)/wwwroot/lib/bootstrap/css/bootstrap-grid.css",
       "PackagePath": "staticwebassets/lib/bootstrap/css/bootstrap-grid.css"
     },
