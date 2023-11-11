@@ -13,7 +13,7 @@ namespace WeatherApp.Components
             var viewModel = new DayViewModel
             {
                 Date = item.Key,
-                IconUrl = $"https://openweathermap.org/img/wn/{iconName}.png"
+                IconUrl = $"/images/{iconName}.png"
             };
 
             return View(viewModel);
