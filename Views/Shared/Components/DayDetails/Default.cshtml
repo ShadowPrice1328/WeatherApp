@@ -1,32 +1,62 @@
 @using System.Globalization
 @model IGrouping<DateTime, List>
 
-<h2 class="">@Model.Key.ToString("MMMM dd, yyyy")</h2>
+
+<h2>@Model.Key.ToString("MMMM dd, yyyy")</h2>
+
 <table class="table table-bordered table-responsive text-center">
     <thead>
         <tr>
             <th>Time</th>
-            <th>Temperature (&#8451;)</th>
-            <th>Feels Like (&#8451;)</th>
-            <th>Pressure (mm)</th>
-            <th>Humidity (%)</th>
-            <th>Wind (m/s)</th>
-            <th>Probability of precipitation (%)</th>
+            @foreach (var weather in Model)
+            {
+                <th>@DateTime.ParseExact(weather.dt_txt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).ToString("HH:mm")</th>
+            }
         </tr>
     </thead>
-    <tbody>
-        @foreach (var weather in Model)
-        {
-            <tr>
-                <td>@DateTime.ParseExact(weather.dt_txt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).ToString("HH:mm")</td>
+    <tbody class="align-middle">
+        <tr>
+            <td><b>Temperature (&#8451;)</b></td>
+            @foreach (var weather in Model)
+            {
                 <td>@weather.main.temp</td>
+            }
+        </tr>
+        <tr>
+            <td><b>Feels Like (&#8451;)</b></td>
+            @foreach (var weather in Model)
+            {
                 <td>@weather.main.feels_like</td>
+            }
+        </tr>
+        <tr>
+            <td><b>Pressure (mm)</b></td>
+            @foreach (var weather in Model)
+            {
                 <td>@weather.main.pressure</td>
+            }
+        </tr>
+        <tr>
+            <td><b>Humidity (%)</b></td>
+            @foreach (var weather in Model)
+            {
                 <td>@weather.main.humidity</td>
+            }
+        </tr>
+        <tr>
+            <td><b>Wind (m/s)</b></td>
+            @foreach (var weather in Model)
+            {
                 <td>@GetWindDirection(weather.wind.deg), @weather.wind.speed</td>
-                <td>@Convert.ToInt32(weather.pop*100)</td>
-            </tr>
-        }
+            }
+        </tr>
+        <tr>
+            <td><b/>Probability of precipitation (%)<b/></td>
+            @foreach (var weather in Model)
+            {
+                <td>@Convert.ToInt32(weather.pop * 100)</td>
+            }
+        </tr>
     </tbody>
 </table>
 
