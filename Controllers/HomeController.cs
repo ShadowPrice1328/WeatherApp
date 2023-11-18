@@ -48,14 +48,5 @@ namespace WeatherApp.Controllers
             var FiveDaysWeather = weather.list.GroupBy(item => DateTime.ParseExact(item.dt_txt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).Date);
             return View("Index", FiveDaysWeather);
         }
-        public IActionResult ChangeUnits(string units)
-        {
-            if (units == null)
-            {
-                units = "metric"; // Set a default value if 'units' is null
-            }
-            HttpContext.Session.SetString("Units", units);
-            return RedirectToAction("Index");
-        }
     }
 }

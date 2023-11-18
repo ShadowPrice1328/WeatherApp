@@ -24,17 +24,17 @@
     </thead>
     <tbody class="align-middle">
         <tr>
-            <td><b>Temperature (&#8451;)</b></td>
+            <td id="temperature"><b>Temperature (&#8451;)</b></td>
             @foreach (var weather in Model)
             {
-                <td>@weather.main.temp</td>
+                <td id="temperaturevalue">@(weather.main.temp)&#176</td>
             }
         </tr>
         <tr>
-            <td><b>Feels Like (&#8451;)</b></td>
+            <td id="feelslike"><b>Feels Like (&#8451;)</b></td>
             @foreach (var weather in Model)
             {
-                <td>@weather.main.feels_like</td>
+                <td id="feelslikevalue">@weather.main.feels_like&#176</td>
             }
         </tr>
         <tr>
@@ -52,10 +52,10 @@
             }
         </tr>
         <tr>
-            <td><b>Wind (m/s)</b></td>
+            <td id="wind"><b>Wind (m/s)</b></td>
             @foreach (var weather in Model)
             {
-                <td>@GetWindDirection(weather.wind.deg), @weather.wind.speed</td>
+                <td>@GetWindDirection(weather.wind.deg), <span id="windspeed">@weather.wind.speed</span></td>
             }
         </tr>
         <tr>
