@@ -6,7 +6,9 @@
         <h2>@Model.Key.ToString("MMMM dd, yyyy")</h2>
     </div>
     <div class="col-auto">
-        <vc:units-change/>
+        <form asp-action="ChangeUnits" asp-controller="Home" method="post">
+            <vc:units-change/>
+        </form>
     </div>
 </div>
 

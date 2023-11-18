@@ -1,4 +1,13 @@
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
-  <label class="form-check-label" for="flexSwitchCheckChecked"> to °F</label>
+@{
+    string unitsValue = HttpContextAccessor?.HttpContext?.Session.GetString("Units");
+    bool isChecked = (unitsValue == "imperial");
+}
+
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<div class="form-check form-switch" onclick="this.parentNode.submit();">
+    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="units"
+           value="imperial" @(isChecked ? "checked" : "")>
+    <label class="form-check-label" for="flexSwitchCheckChecked"> to °F</label>
 </div>
