@@ -1,11 +1,13 @@
 @model string;
+@using WeatherApp.Extentions;
 
 <div class = "container col-5">
     <form asp-action="Search" asp-controller="Home" method="get">
         <div class="d-flex justify-content-center p-2">
             <div class="input-group col-5">
                 <input name="city" type="text" class="form-control" placeholder="Enter the city name"
-                    aria-label="Enter the city name" aria-describedby="button-search" value="@Model" autocomplete="off"/>
+                    aria-label="Enter the city name" aria-describedby="button-search" value="@Model.FirstToUpper()" autocomplete="off"
+                    id="cityInput"/>
 
                 <button class="btn btn-outline-secondary" type="submit" id="button-search" data-mdb-ripple-color="dark">
                     Search
