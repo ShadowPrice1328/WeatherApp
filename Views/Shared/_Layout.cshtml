@@ -9,8 +9,7 @@
         <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <title>WeatherApp</title>
 
-        @Html.Partial("_Favicons")
-
+        <partial name = "_Favicons"/>
 
         <nav class="navbar bg-body-tertiary border-bottom text-center">
             <div class="container-fluid" style="display: flex; justify-content: center; align-items: center">
@@ -22,20 +21,7 @@
     <body>
     
     <div class="container-fluid p-2">
-        <div class = "container col-5">
-            <form asp-action="Search" asp-controller="Home" method="get">
-                <div class="d-flex justify-content-center p-2">
-                    <div class="input-group col-5">
-                        <input name="city" type="text" class="form-control" placeholder="Enter the city name"
-                            aria-label="Enter the city name" aria-describedby="button-search" value="@city" autocomplete="off"/>
-
-                        <button class="btn btn-outline-secondary" type="submit" id="button-search" data-mdb-ripple-color="dark">
-                            Search
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
+        <partial name = "_SearchBox" model="@city"/>
 
         <main role="main" class="container p-2" style="margin-bottom: 60px;">
             @RenderBody()
