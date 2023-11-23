@@ -16,3 +16,14 @@
         </div>
     </form>
 </div>
+
+<script>
+    var enteredCity = document.getElementById('cityInput').value;
+    var currentUrl = window.location.href;
+
+    var urlParams = new URLSearchParams(currentUrl.split('?')[1]);
+    var urlCity = urlParams.get('city');
+
+    var newUrl = currentUrl.replace("city=" + urlCity, "city=" + enteredCity);
+    window.history.replaceState({}, document.title, newUrl);
+</script>
