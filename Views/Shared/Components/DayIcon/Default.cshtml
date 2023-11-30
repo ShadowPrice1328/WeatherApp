@@ -1,6 +1,6 @@
 @model DayViewModel
 
-<div class="card shadow mb-3"" style="cursor: pointer; line-height: 1; width:8rem; margin-left: 15px" onclick="this.parentNode.submit();">
+<div class="card shadow mb-3 @if(Model.IsSelected) { <text>bg-dark</text> }" style="cursor: pointer; line-height: 1; width:8rem; margin-left: 15px" onclick="this.parentNode.submit();">
     <div class="card-body text-center">
         <p style="margin-bottom: 10px;">@Model.Date.ToString("dddd")</p>
         <b>@Model.Date.ToString("dd")</b>

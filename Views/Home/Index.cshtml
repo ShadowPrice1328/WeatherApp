@@ -1,16 +1,22 @@
 @model IEnumerable<IGrouping<DateTime, List>>;
 
-<div class = "container p-2">
+<div class="container p-2">
     <div class="d-flex justify-content-center">
         <div class="card-group" style="white-space: nowrap;">
-            @{foreach (var weatherItem in Model)
-            {
-                <form asp-action="ShowDetails" asp-controller="Home" method="post">
-                    <input type="hidden" name="date" value="@weatherItem.Key.ToString("yyyy-MM-dd")" />
-                    <input type="hidden" name="city" value="@ViewData["City"]"/>
-                    <vc:day-icon item=weatherItem/>
-                </form>
-            }}
+            @{
+                foreach (var weatherItem in Model)
+                {
+                    <form asp-action="ShowDetails" asp-controller="Home" method="post">
+                        <input type="hidden" name="date" value="@weatherItem.Key.ToString("yyyy-MM-dd")" />
+                        <input type="hidden" name="city" value="@ViewData["City"]"/>
+
+                       <vc:day-icon item="weatherItem" isSelected=
+                        "@(ViewData.ContainsKey("selectedDay") && 
+                        (DateTime.ParseExact(ViewData["selectedDay"].ToString(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).DayOfYear) == weatherItem.Key.DayOfYear)" />
+
+                    </form>
+                }
+            }
         </div>
     </div>
 
@@ -19,9 +25,9 @@
         {
             TempData["selectedDay"] = ViewData["selectedDay"];
             var selectedModel = Model
-            .SelectMany(group => group)
-            .GroupBy(item => DateTime.ParseExact(item.dt_txt, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).Date)
-            .FirstOrDefault(group => group.Key == DateTime.ParseExact(ViewData["selectedDay"] as string, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date);
+                .SelectMany(group => group)
+                .GroupBy(item => DateTime.ParseExact(item.dt_txt, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).Date)
+                .FirstOrDefault(group => group.Key == DateTime.ParseExact(ViewData["selectedDay"] as string, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date);
             @await Component.InvokeAsync("DayDetails", selectedModel)
         }
         else
