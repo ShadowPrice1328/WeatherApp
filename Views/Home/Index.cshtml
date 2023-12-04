@@ -13,15 +13,14 @@
                         @{
                             if (ViewData.ContainsKey("selectedDay"))
                             {
-                                int year = DateTime.ParseExact(ViewData["selectedDay"].ToString(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).DayOfYear;
-                                int yearSecond = weatherItem.Key.DayOfYear;
+                                int parsedDay = DateTime.ParseExact(ViewData["selectedDay"].ToString(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).DayOfYear;
+                                int actualDay = weatherItem.Key.DayOfYear;
 
-                                bool selected = (year == yearSecond);
+                                bool selected = (parsedDay == actualDay);
                                 ViewData["selected"] = selected;
                             }
                         }
 
-                        @* @await Component.InvokeAsync("DayIcon", weatherItem, ) *@
                        <vc:day-icon item="weatherItem"/>
 
                     </form>

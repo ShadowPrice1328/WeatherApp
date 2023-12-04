@@ -1,0 +1,12 @@
+[33mcommit a79f1d6b1e600438778189084e16bb79cff076d0[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Merge: 8ae982c 3b29b1e
+Author: Anna Sonchak <kisukeurahara1328@gmail.com>
+Date:   Thu Nov 30 15:34:04 2023 +0100
+
+    Merge branch 'master' of https://github.com/ShadowPrice1328/WeatherApp
+
+[33mcommit 8ae982c24377a0e43528db8e6d951e4dd2359ba3[m
+Author: Anna Sonchak <kisukeurahara1328@gmail.com>
+Date:   Thu Nov 30 15:33:10 2023 +0100
+
+    Checking day selection for changing background color
