@@ -20,7 +20,9 @@ namespace WeatherApp.Services
         }
         public async Task<WeatherResponse> GetWeatherResponse(string city)
         {
-            var content = JsonConvert.DeserializeObject<JToken>(await GetJsonResponse(city));
+            string jsonResponse = await GetJsonResponse(city) ?? throw new Exception("Failed to retrieve weather information.");
+            
+            var content = JsonConvert.DeserializeObject<JToken>(jsonResponse);
             return content.ToObject<WeatherResponse>();
         }
     }

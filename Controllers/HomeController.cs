@@ -28,8 +28,16 @@ namespace WeatherApp.Controllers
             {
                 city = city.Trim();
                 ViewData["City"] = city;
-
-                WeatherResponse weather = await _apiservice.GetWeatherResponse(city);
+                
+                WeatherResponse weather;
+                try
+                {
+                    weather = await _apiservice.GetWeatherResponse(city);
+                }
+                catch (Exception)
+                {
+                    return View("NotFound");
+                }
                 
                 var FiveDaysWeather = weather.list.GroupBy(item => DateTime.ParseExact(item.dt_txt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).Date);
 
