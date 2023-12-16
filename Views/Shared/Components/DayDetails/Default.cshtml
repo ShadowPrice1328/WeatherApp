@@ -1,6 +1,8 @@
 @using System.Globalization
 @model IGrouping<DateTime, List>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <div class="row">
     <div class="col">
         <h2>@Model.Key.ToString("MMMM dd, yyyy")</h2>
@@ -56,10 +58,13 @@
             }
         </tr>
         <tr>
-            <td id="wind"><b>Wind (m/s)</b></td>
+        <td id="wind"><b>Wind (m/s)</b></td>
             @foreach (var weather in Model)
             {
-                <td>@GetWindDirection(weather.wind.deg), <span id="windspeed">@weather.wind.speed</span></td>
+                <td title = "@GetWindDirection(@weather.wind.deg)">
+                    <i class="fa-solid fa-arrow-up" style="transform: rotate(@GetArrowRotation(weather.wind.deg)); font-size: 14px; margin-right: 5px;"></i>
+                    <span id="windspeed">@weather.wind.speed</span>
+                </td>            
             }
         </tr>
         <tr>
@@ -96,5 +101,11 @@
             default:
                 return "Northerly";
         }
+    }
+
+    static string GetArrowRotation(double deg)
+    {
+        double rotation = (deg + 180) % 360;
+        return $"{rotation}deg";
     }
 }

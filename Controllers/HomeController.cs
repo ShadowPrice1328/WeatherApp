@@ -39,7 +39,9 @@ namespace WeatherApp.Controllers
                     return View("NotFound");
                 }
                 
-                var FiveDaysWeather = weather.list.GroupBy(item => DateTime.ParseExact(item.dt_txt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).Date);
+                var FiveDaysWeather = weather.list.GroupBy(
+                    item => DateTime.ParseExact(
+                    item.dt_txt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).Date);
 
                 return View("Index", FiveDaysWeather);
             }
