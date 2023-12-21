@@ -19,9 +19,8 @@ namespace WeatherApp.Controllers
             ViewData["City"] = city;
             return RedirectToAction("Search", new {city = "Kyiv"});
         }
-        [Route("{city}")]
         [Route("Search")]
-        [Route("Search/{city}")]
+        [Route("{city}")]
         public async Task<IActionResult> Search(string city = "Kyiv")
         {
             if (!string.IsNullOrEmpty(city))
