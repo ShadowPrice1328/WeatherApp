@@ -20,8 +20,8 @@ namespace WeatherApp.Controllers
             return RedirectToAction("Search", new {city = "Kyiv"});
         }
         [Route("{city}")]
-        [Route("Home")]
-        [Route("Home/Search")]
+        [Route("Search")]
+        [Route("Search/{city}")]
         public async Task<IActionResult> Search(string city = "Kyiv")
         {
             if (!string.IsNullOrEmpty(city))
@@ -50,8 +50,10 @@ namespace WeatherApp.Controllers
                 return RedirectToAction("Index");
             }
         }
-        [HttpPost]
-        public async Task<IActionResult> ShowDetails(string date, string city)
+        [Route("ShowDetails")]
+        [Route("{city}/{date}")]
+        [HttpPost("{city}/{date}")]
+        public async Task<IActionResult> ShowDetails(string city, string date)
         {
             ViewData["selectedDay"] = date;
             ViewData["City"] = city;
