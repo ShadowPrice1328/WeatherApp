@@ -1,7 +1,8 @@
 @model DayViewModel
 
 <div class="card shadow mb-3 @if(Model.IsSelected) { <text>border border-4</text> }" 
-    style="cursor: pointer; line-height: 1; width:8rem; margin-left: 15px" onclick="this.parentNode.submit();">
+    style="cursor: pointer; line-height: 1; width:8rem; margin-left: 15px" 
+    onclick="location.href='/@ViewData["City"]/@Model.Date.ToString("yyyy-MM-dd")';"">
 
     <div class="card-body text-center">
         <p style="margin-bottom: 10px;">@Model.Date.ToString("dddd")</p>
