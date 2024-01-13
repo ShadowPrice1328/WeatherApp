@@ -1,5 +1,6 @@
 @{
     var city = ViewData["City"] as string;
+    bool isDarkTheme = Context.Request.Cookies["DarkTheme"] == "true";
 }
 
 <!DOCTYPE html>
@@ -14,12 +15,37 @@
         <nav class="navbar bg-body-tertiary border-bottom text-center">
             <div class="container-fluid" style="display: flex; justify-content: center; align-items: center">
                 <a class="navbar-brand" href="/">WeatherApp</a>
+                <button onclick="toggleDarkTheme()" class="m-3 float-end">Toggle dark mode</button>
             </div>
         </nav>
 
+        <style>
+            :root {
+                --background-color: #fff;
+                --text-color: #333;
+            }
+
+            body {
+                background-color: var(--background-color);
+                color: var(--text-color);
+            }
+
+            .dark-theme {
+                --background-color: #333;
+                --text-color: #fff;
+            }
+        </style>
+
     </head>
-    <body>
+    <body class="@((isDarkTheme) ? "dark-theme" : "")">
     
+    @* <div class="float-end m-2 p-2">
+        <label class="switch"> Toggle dark mode 
+            <input type="checkbox" id="darkThemeSwitch" @(isDarkTheme ? "checked" : "") onchange="toggleDarkTheme()">
+        </label>
+    </div> *@
+</div>
+
     <div class="container-fluid p-2">
         <partial name = "_SearchBox" model="@city"/>
 
@@ -38,3 +64,15 @@
         </footer>
     </body>
 </html>
+
+<script>
+    @* if (@isDarkTheme && !(document.body.classList.contains('dark-theme'))){
+        document.body.classList.toggle('dark-theme', @isDarkTheme);
+    } *@
+    function toggleDarkTheme() {
+        var body = document.body;
+        var isDarkTheme = body.classList.toggle('dark-theme');
+        document.cookie = "DarkTheme=" + isDarkTheme + "; path=/";
+        @* document.body.classList.toggle('dark-theme', @isDarkTheme); *@
+}
+</script>
