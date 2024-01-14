@@ -5,64 +5,99 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width:device-width">
-        <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <title>WeatherApp</title>
+<head>
+    <meta name="viewport" content="width:device-width">
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <title>WeatherApp</title>
 
-        <partial name = "_Favicons"/>
+    <partial name="_Favicons"/>
 
-        <nav class="navbar bg-body-tertiary border-bottom text-center">
-            <div class="container-fluid" style="display: flex; justify-content: center; align-items: center">
-                <a class="navbar-brand" href="/">WeatherApp</a>
-                <button onclick="toggleDarkTheme()" class="m-3 float-end">Toggle dark mode</button>
-            </div>
-        </nav>
-
-        <style>
-            :root {
-                --background-color: #fff;
-                --text-color: #333;
-            }
-
-            body {
-                background-color: var(--background-color);
-                color: var(--text-color);
-            }
-
-            .dark-theme {
-                --background-color: #333;
-                --text-color: #fff;
-            }
-        </style>
-
-    </head>
-</div>
-
-    <body class="@((isDarkTheme) ? "dark-theme" : "")">
-        <div class="container-fluid p-2">
-            <partial name = "_SearchBox" model="@city"/>
-
-            <main role="main" class="container p-2" style="margin-bottom: 60px;">
-                @RenderBody()
-            </main>
+    <nav class="navbar bg-body-tertiary border-bottom text-center">
+        <div class="container-fluid" style="display: flex; justify-content: center; align-items: center">
+            <a class="navbar-brand" href="/">WeatherApp</a>
+            <button onclick="toggleDarkTheme()" class="m-3 float-end">Toggle dark mode</button>
         </div>
+    </nav>
 
-        <footer class="footer fixed-bottom border-top text-muted p-2 text-center bg-body-tertiary"> 
-            <div class="container-fluid">
-                &copy; 2023 - WeatherApp
-                <p style="margin-bottom: 0;">
-                    <a href="https://github.com/ShadowPrice1328/WeatherApp" class="text-decoration-none">GitHub</a>
-                </p>
-            </div>
-        </footer>
-    </body>
-</html>
+    <style>
+        :root {
+            --background-color: #fff;
+            --text-color: #000;
+            --footer-background-color-light: #f8f9fa; /* Light mode footer background color */
+            --footer-text-color-light: #6c757d; /* Light mode footer text color */
+            --footer-background-color-dark: #232323; /* Dark mode footer background color */
+            --footer-text-color-dark: #fff; /* Dark mode footer text color */
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .dark-theme {
+            --background-color: #232323;
+            --text-color: #fff;
+        }
+
+        body.dark-theme {
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        footer {
+            background-color: var(--footer-background-color-light);
+            color: var(--footer-text-color-light);
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .dark-theme footer {
+            background-color: var(--footer-background-color-dark);
+            color: var(--footer-text-color-dark);
+        }
+    </style>
+</head>
+<body class="@((isDarkTheme) ? "dark-theme" : "")">
+    <div class="container-fluid p-2">
+        <partial name="_SearchBox" model="@city"/>
+
+        <main role="main" class="container p-2" style="margin-bottom: 60px;">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer fixed-bottom text-muted p-2 text-center">
+        <div class="container-fluid">
+            &copy; 2023 - WeatherApp
+            <p style="margin-bottom: 0;">
+                <a href="https://github.com/ShadowPrice1328/WeatherApp" class="text-decoration-none">GitHub</a>
+            </p>
+        </div>
+    </footer>
 
 <script>
     function toggleDarkTheme() {
         var body = document.body;
         var isDarkTheme = body.classList.toggle('dark-theme');
         document.cookie = "DarkTheme=" + isDarkTheme + "; path=/";
-}
+
+        if (isDarkTheme) {
+            console.log("dark theme ON")
+
+            document.querySelector('footer').style.cssText = 'background-color: #2C3333; color: #fff; border-top: 1px solid #00FFFF;';
+            document.querySelector('footer').style.backgroundColor = '#2C3333';
+            document.querySelector('footer').querySelector('div').style.color = '#fff';
+            document.querySelector('footer').querySelector('p').querySelector('a').style.color = '#00FFFF';
+        } else {
+            console.log("dark theme OFF")
+            
+            document.querySelector('footer').style.cssText = 'background-color: #f8f9fa; color: #6c757d; border-top: 1px solid #dee2e6;';
+            document.querySelector('footer').style.backgroundColor = '#f8f9fa';
+            document.querySelector('footer').querySelector('div').style.color = '#6c757d';
+            document.querySelector('footer').querySelector('p').querySelector('a').style.color = '#0a58ca';
+        }
+    }
 </script>
+
+</body>
+</html>
