@@ -49,9 +49,9 @@ namespace WeatherApp.Controllers
                 return RedirectToAction("Index");
             }
         }
-        [Route("ShowDetails")]
-        [Route("{city}/{date}")]
-        [HttpPost("{city}/{date}")]
+
+        [Route("{city}/{date:length(10)}")]
+        [HttpPost("{city}/{date:length(10)}")]
         public async Task<IActionResult> ShowDetails(string city, string date)
         {
             ViewData["selectedDay"] = date;
