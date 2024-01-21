@@ -69,6 +69,8 @@
     function toggleDarkTheme() {
         var body = document.body;
         var isDarkTheme = body.classList.toggle('dark-theme');
+
+        // Set cookie
         document.cookie = "DarkTheme=" + isDarkTheme + "; path=/";
 
         changeTheme(isDarkTheme);
