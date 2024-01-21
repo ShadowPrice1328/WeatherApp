@@ -6,6 +6,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        :root {
+            --background-color: #fff;
+            --text-color: #000;
+        }
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        .dark-theme {
+            --background-color: #232323;
+            --text-color: #fff;
+        }
+        body.dark-theme {
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        footer {
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        nav {
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+    </style>
+
     <meta name="viewport" content="width:device-width">
     <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <title>WeatherApp</title>
@@ -19,47 +45,6 @@
         </div>
     </nav>
 
-    <style>
-        :root {
-            --background-color: #fff;
-            --text-color: #000;
-            --footer-background-color-light: #f8f9fa; /* Light mode footer background color */
-            --footer-text-color-light: #6c757d; /* Light mode footer text color */
-            --footer-background-color-dark: #232323; /* Dark mode footer background color */
-            --footer-text-color-dark: #fff; /* Dark mode footer text color */
-        }
-
-        body {
-            background-color: var(--background-color);
-            color: var(--text-color);
-            transition: background-color 0.5s ease, color 0.5s ease;
-        }
-
-        .dark-theme {
-            --background-color: #232323;
-            --text-color: #fff;
-        }
-
-        body.dark-theme {
-            background-color: var(--background-color);
-            color: var(--text-color);
-        }
-
-        footer {
-            background-color: var(--footer-background-color-light);
-            color: var(--footer-text-color-light);
-            transition: background-color 0.5s ease, color 0.5s ease;
-        }
-
-        nav {
-            transition: background-color 0.5s ease, color 0.5s ease;
-        }
-
-        .dark-theme footer {
-            background-color: var(--footer-background-color-dark);
-            color: var(--footer-text-color-dark);
-        }
-    </style>
 </head>
 <body class="@((isDarkTheme) ? "dark-theme" : "")">
     <div class="container-fluid p-2">
@@ -80,49 +65,35 @@
     </footer>
 
 <script>
-    changeTheme();
-
+    // Function to toggle dark theme
     function toggleDarkTheme() {
         var body = document.body;
         var isDarkTheme = body.classList.toggle('dark-theme');
         document.cookie = "DarkTheme=" + isDarkTheme + "; path=/";
 
-        var darkThemeValue = document.cookie.split(';').some(cookie => {
-            const trimmedCookie = cookie.trim();
-            return trimmedCookie.startsWith('DarkTheme=') && trimmedCookie.slice('DarkTheme='.length) === 'true';
-        }); 
-
-        changeTheme(darkThemeValue);
+        changeTheme(isDarkTheme);
     }
 
-    function changeTheme() {
-            var darkThemeValue = document.cookie.split(';').some(cookie => {
-            const trimmedCookie = cookie.trim();
-            return trimmedCookie.startsWith('DarkTheme=') && trimmedCookie.slice('DarkTheme='.length) === 'true';
-        }); 
-        console.log(darkThemeValue);
+    // Function to change theme based on the darkTheme parameter
+    function changeTheme(darkTheme) {
+        var footer = document.querySelector('footer');
+        var nav = document.querySelector('nav');
 
-        if (darkThemeValue) {
-            // footer
-            document.querySelector('footer').style.cssText = 'background-color: #2C3333; color: #fff; border-top: 1px solid #00FFFF;';
-            document.querySelector('footer').querySelector('div').style.color = '#fff';
-            document.querySelector('footer').querySelector('p').querySelector('a').style.color = '#00FFFF';
+        // Set styles for footer
+        footer.style.backgroundColor = darkTheme ? '#2C3333' : '#f8f9fa';
+        footer.style.color = darkTheme ? '#fff' : '#6c757d';
+        footer.style.borderTop = darkTheme ? '1px solid #00FFFF' : '1px solid #dee2e6';
+        footer.querySelector('div').style.color = darkTheme ? '#fff' : '#6c757d';
+        footer.querySelector('p a').style.color = darkTheme ? '#00FFFF' : '#0a58ca';
 
-            // header
-            document.querySelector('nav a').style.color = '#fff';
-            document.querySelector('nav').style.cssText = 'border-bottom: 1px solid #00FFFF; background-color: #2C3333';          
-        } else {
-            // footer
-            document.querySelector('footer').style.cssText = 'background-color: #f8f9fa; color: #6c757d; border-top: 1px solid #dee2e6;';
-            document.querySelector('footer').querySelector('div').style.color = '#6c757d';
-            document.querySelector('footer').querySelector('p').querySelector('a').style.color = '#0a58ca';
-
-            // header
-            document.querySelector('nav').style.backgroundColor = '#f8f9fa';
-            document.querySelector('nav a').style.color = '#181819';
-            document.querySelector('nav').style.cssText = 'border-bottom: 1px solid #dee2e6;';          
-        }
+        // Set styles for header (nav)
+        nav.style.backgroundColor = darkTheme ? '#2C3333' : '#f8f9fa';
+        nav.style.borderBottom = darkTheme ? '1px solid #00FFFF' : '1px solid #dee2e6';
+        nav.querySelector('a').style.color = darkTheme ? '#fff' : '#181819';
     }
+
+    // Initial call to changeTheme on page load
+    changeTheme(document.body.classList.contains('dark-theme'));
 </script>
 
 </body>
