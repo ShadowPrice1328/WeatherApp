@@ -1,5 +1,8 @@
-@model string;
-@using WeatherApp.Extentions;
+@{
+    @model string;
+    @using WeatherApp.Extentions;
+    var isDarkTheme = Context.Request.Cookies["DarkTheme"] == "true";
+}
 
 <div class = "container col-5">
     <form asp-action="Search" asp-controller="Home" method="get">
@@ -9,7 +12,7 @@
                     aria-label="Enter the city name" aria-describedby="button-search" value="@Model.FirstToUpper()" autocomplete="off"
                     id="cityInput"/>
 
-                <button class="btn btn-outline-secondary" type="submit" id="button-search" data-mdb-ripple-color="dark">
+                <button class="btn @(isDarkTheme ? "btn-secondary" : "btn-outline-secondary")" type="submit" id="button-search" data-mdb-ripple-color="dark">
                     Search
                 </button>
             </div>

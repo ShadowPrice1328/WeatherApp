@@ -92,6 +92,9 @@
         nav.style.backgroundColor = darkTheme ? '#2C3333' : '#f8f9fa';
         nav.style.borderBottom = darkTheme ? '1px solid #00FFFF' : '1px solid #dee2e6';
         nav.querySelector('a').style.color = darkTheme ? '#fff' : '#181819';
+
+        var button = document.getElementById('button-search');
+        button.className = 'btn ' + (darkTheme ? 'btn-secondary' : 'btn-outline-secondary');
     }
 
     // Initial call to changeTheme on page load
