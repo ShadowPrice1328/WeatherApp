@@ -38,15 +38,16 @@
 
     <partial name="_Favicons"/>
 
-    <nav class="navbar text-center">
-        <div class="container-fluid" style="display: flex; justify-content: center; align-items: center">
-            <a class="navbar-brand" href="/">WeatherApp</a>
-            <button onclick="toggleDarkTheme()" class="m-3 float-end">Toggle dark mode</button>
-        </div>
-    </nav>
+<nav class="navbar text-center containter-fluid">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" style="margin-right: auto!important; margin-left: 46%;" href="/">WeatherApp</a>
+        <button onclick="toggleDarkTheme()" class="m-3 btn btn-dark">Toggle dark mode</button>
+    </div>
+</nav>
+
 
 </head>
-<body class="@((isDarkTheme) ? "dark-theme" : "")">
+<body class="@((isDarkTheme) ? "dark-theme" : "") d-flex flex-column min-vh-100">
     <div class="container-fluid p-2">
         <partial name="_SearchBox" model="@city"/>
 
@@ -55,7 +56,7 @@
         </main>
     </div>
 
-    <footer class="footer text-muted p-2 text-center" style="margin-top: -50px;">
+    <footer class="footer text-muted p-2 text-center mt-auto" style="margin-top: -50px;">
         <div class="container-fluid">
             &copy; 2023 - WeatherApp
             <p style="margin-bottom: 0;">
