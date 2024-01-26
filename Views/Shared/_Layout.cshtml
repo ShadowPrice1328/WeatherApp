@@ -98,8 +98,8 @@
 
         cards.forEach(function (card) {
             card.style.backgroundColor = darkTheme ? '#28282b' : '#ffffff';
-            card.style.border = darkTheme ? '1px solid #99FFFF' : '1px solid transparent';
-            card.style.boxShadow = darkTheme ? '0 0 10px #99FFFF' : 'none';
+            card.style.border = darkTheme ? '1px solid #00e5e5' : '1px solid transparent';
+            card.style.boxShadow = darkTheme ? '0 0 10px #00e5e5' : 'none';
             card.style.transition = 'background-color 0.5s ease, box-shadow 0.5s ease';
 
             // Get the paragraph element inside the card
@@ -116,7 +116,14 @@
 
         var searchButton = document.getElementById('button-search');
         searchButton.className = 'btn ' + (darkTheme ? 'btn-secondary' : 'btn-outline-secondary');
-        
+
+        var table = document.querySelector('table');
+        if (darkTheme) {
+            table.classList.add('table-dark');
+        } else {
+            table.classList.remove('table-dark');
+        }  
+
         var button = document.getElementById('button-search');
         button.className = 'btn ' + (darkTheme ? 'btn-secondary' : 'btn-outline-secondary');
     }

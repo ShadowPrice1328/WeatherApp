@@ -20,7 +20,7 @@
             <th class="align-middle">Time</th>
             @foreach (var weather in Model)
             {
-                <th>
+                <th style="padding-top: 15px">
                     @DateTime.ParseExact(weather.dt_txt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).ToString("HH:mm")
                     <br />
                     <img src="/images/@(weather.weather.First().icon).png" style="max-width: 80px; height: auto;" />
