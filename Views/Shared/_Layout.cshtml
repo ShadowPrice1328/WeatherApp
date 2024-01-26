@@ -17,7 +17,7 @@
             transition: background-color 0.5s ease, color 0.5s ease;
         }
         .dark-theme {
-            --background-color: #232323;
+            --background-color: #1e1e1e;
             --text-color: #fff;
         }
         body.dark-theme {
@@ -82,17 +82,41 @@
         var nav = document.querySelector('nav');
 
         // Set styles for footer
-        footer.style.backgroundColor = darkTheme ? '#2C3333' : '#f8f9fa';
+        footer.style.backgroundColor = darkTheme ? '#2d2d30' : '#f8f9fa';
         footer.style.color = darkTheme ? '#fff' : '#6c757d';
         footer.style.borderTop = darkTheme ? '1px solid #00FFFF' : '1px solid #dee2e6';
         footer.querySelector('div').style.color = darkTheme ? '#fff' : '#6c757d';
         footer.querySelector('p a').style.color = darkTheme ? '#00FFFF' : '#0a58ca';
 
         // Set styles for header (nav)
-        nav.style.backgroundColor = darkTheme ? '#2C3333' : '#f8f9fa';
+        nav.style.backgroundColor = darkTheme ? '#2d2d30' : '#f8f9fa';
         nav.style.borderBottom = darkTheme ? '1px solid #00FFFF' : '1px solid #dee2e6';
         nav.querySelector('a').style.color = darkTheme ? '#fff' : '#181819';
 
+        // Set styles for .card elements
+        var cards = document.querySelectorAll('.card');
+
+        cards.forEach(function (card) {
+            card.style.backgroundColor = darkTheme ? '#28282b' : '#ffffff';
+            card.style.border = darkTheme ? '1px solid #99FFFF' : '1px solid transparent';
+            card.style.boxShadow = darkTheme ? '0 0 10px #99FFFF' : 'none';
+            card.style.transition = 'background-color 0.5s ease, box-shadow 0.5s ease';
+
+            // Get the paragraph element inside the card
+            // Update the text color based on dark theme
+            var paragraphs = card.querySelectorAll('.card-body p');
+            paragraphs.forEach(function (paragraph) {
+                paragraph.style.color = darkTheme ? '#ececec' : '#000000';
+            });
+
+            var dayOfMonth = card.querySelector('.card-body b');
+            dayOfMonth.style.color = darkTheme ? '#ececec' : '#000000';
+
+        });
+
+        var searchButton = document.getElementById('button-search');
+        searchButton.className = 'btn ' + (darkTheme ? 'btn-secondary' : 'btn-outline-secondary');
+        
         var button = document.getElementById('button-search');
         button.className = 'btn ' + (darkTheme ? 'btn-secondary' : 'btn-outline-secondary');
     }
