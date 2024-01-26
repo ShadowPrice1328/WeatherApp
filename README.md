@@ -6,3 +6,5 @@
 
 Also implemented switching between Celsius and Fahrenheit (m/s and mph as well).
 Dark Theme available.
+
+[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-personal-page.svg)](https://stand-with-ukraine.pp.ua)
