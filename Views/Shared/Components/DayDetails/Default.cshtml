@@ -1,11 +1,12 @@
 @using System.Globalization
+@using WeatherApp.Extentions
 @model IGrouping<DateTime, List>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <div class="row">
     <div class="col">
-        <h2>@Model.Key.ToString("MMMM dd, yyyy")</h2>
+        <h2>Weather in @ViewData["City"].ToString().FirstToUpper() on <i>@Model.Key.ToString("MMMM dd, yyyy")</i></h2>
     </div>
     <div class="col-auto">
         <form asp-action="ChangeUnits" asp-controller="Home" method="post">

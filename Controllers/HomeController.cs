@@ -29,6 +29,7 @@ namespace WeatherApp.Controllers
                 ViewData["City"] = city;
                 
                 WeatherResponse weather;
+
                 try
                 {
                     weather = await _apiservice.GetWeatherResponse(city);
