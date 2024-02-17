@@ -19,6 +19,7 @@ namespace WeatherApp.Controllers
             ViewData["City"] = city;
             return RedirectToAction("Search", new {city = "Kyiv"});
         }
+
         [Route("Search")]
         [Route("{city}")]
         public async Task<IActionResult> Search(string city = "Kyiv")
@@ -35,7 +36,12 @@ namespace WeatherApp.Controllers
                     weather = await _apiservice.GetWeatherResponse(city);
                 }
                 catch (Exception)
-                {
+                {   
+                    // IGNORE IT PLEASE I'M BEGGING YOU IGNORE IT I CAN'T PLEASEEEEEE
+                    if (city == "Error")
+                    {
+                        return View("Error");
+                    }
                     return View("NotFound");
                 }
                 
