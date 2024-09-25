@@ -2,20 +2,26 @@
 using Microsoft.Extensions.Caching.Memory;
 using Models;
 using ServiceContracts;
+using ServiceContracts.Data;
+using Services;
+using WeatherApp.ActionFilters;
 
 namespace WeatherApp.Controllers
 {
     [Route("api")]
     [ApiController]
+    [ServiceFilter(typeof(ApiKeyFilter))]
     public class WeatherApiController : ControllerBase
     {
         private readonly IWeatherService _weatherService;
         private readonly IMemoryCache _memoryCache;
         private readonly TimeSpan _cacheDuration = TimeSpan.FromMinutes(30);
-        public WeatherApiController(IWeatherService weatherService, IMemoryCache memoryCache)
+        private readonly IApiKeyValidation _apiKeyValidation;
+        public WeatherApiController(IWeatherService weatherService, IMemoryCache memoryCache, IApiKeyValidation apiKeyValidation)
         {
             _memoryCache = memoryCache;
             _weatherService = weatherService;
+            _apiKeyValidation = apiKeyValidation;
         }
 
         [HttpGet("forecast/{city}")]
@@ -97,6 +103,22 @@ namespace WeatherApp.Controllers
             }
             
             return Ok(current);
+        }
+
+        [HttpGet("header")]
+        public IActionResult AuthenticateViaHeader()
+        {
+            string? apiKey = Request.Headers[Constants.ApiKeyHeaderName];
+
+            if (string.IsNullOrWhiteSpace(apiKey))
+                return BadRequest();
+
+            bool isValid = _apiKeyValidation.IsValidApiKey(apiKey);
+
+            if (!isValid)
+                return Unauthorized();
+
+            return Ok();
         }
     }
 }
