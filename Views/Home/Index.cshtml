@@ -1,26 +1,27 @@
-@model IEnumerable<IGrouping<DateTime, List>>;
+@model WeatherViewModel
 
 <div class="container p-2">
     <div class="d-flex justify-content-center">
         <div class="card-group" style="white-space: nowrap;">
             @{
-                foreach (var weatherItem in Model)
+                foreach (var weatherItem in Model.GroupedWeather)
                 {
                     <form asp-action="ShowDetails" asp-controller="Home" method="post">
                         <input type="hidden" name="date" value="@weatherItem.Key.ToString("yyyy-MM-dd")" />
-                        <input type="hidden" name="city" value="@ViewData["City"]"/>
+                        <input type="hidden" name="city" value="@Model.City"/>
 
                         @{
-                            if (ViewData.ContainsKey("selectedDay"))
+                            if (!string.IsNullOrEmpty(Model.Date))
                             {
-                                int parsedDay = DateTime.ParseExact(ViewData["selectedDay"].ToString(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).DayOfYear;
+                                int parsedDay = DateTime.ParseExact(Model.Date.ToString(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).DayOfYear;
                                 int actualDay = weatherItem.Key.DayOfYear;
 
                                 bool selected = (parsedDay == actualDay);
                                 ViewData["selected"] = selected;
                             }
-                        }
 
+                            TempData["City"] = Model.City;
+                        }
                        <vc:day-icon item="weatherItem"/>
 
                     </form>
@@ -30,18 +31,22 @@
     </div>
 
     <div style="margin-left: 10%; margin-top: 15px;">
-        @if (ViewData.ContainsKey("selectedDay"))
+        @if (!string.IsNullOrEmpty(Model.Date))
         {
-            TempData["selectedDay"] = ViewData["selectedDay"];
-            var selectedModel = Model
+            TempData["selectedDay"] = Model.Date;
+
+            var selectedModel = Model.GroupedWeather
                 .SelectMany(group => group)
                 .GroupBy(item => DateTime.ParseExact(item.dt_txt, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).Date)
-                .FirstOrDefault(group => group.Key == DateTime.ParseExact(ViewData["selectedDay"] as string, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date);
+                .FirstOrDefault(group => group.Key == DateTime.ParseExact(Model.Date as string, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date);
+
             @await Component.InvokeAsync("DayDetails", selectedModel)
         }
         else
         {
-            var selectedModel = Model.First();
+            TempData["City"] = Model.City;
+
+            var selectedModel = Model.GroupedWeather.First();
             @await Component.InvokeAsync("DayDetails", selectedModel)   
         }
     </div>

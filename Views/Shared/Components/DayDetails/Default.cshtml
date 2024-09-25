@@ -1,12 +1,12 @@
 @using System.Globalization
 @using WeatherApp.Extentions
-@model IGrouping<DateTime, List>
+@model DayDetailsViewModel
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <div class="row">
     <div class="col">
-        <h2>Weather in @ViewData["City"].ToString().FirstToUpper() on <i>@Model.Key.ToString("MMMM dd, yyyy")</i></h2>
+        <h2>Weather in @Model.City?.FirstToUpper() on <i>@Model.DayInfo?.Key.ToString("MMMM dd, yyyy")</i></h2>
     </div>
     <div class="col-auto">
         <form asp-action="ChangeUnits" asp-controller="Home" method="post">
@@ -19,7 +19,7 @@
     <thead>
         <tr>
             <th class="align-middle">Time</th>
-            @foreach (var weather in Model)
+            @foreach (var weather in Model.DayInfo)
             {
                 <th style="padding-top: 15px">
                     @DateTime.ParseExact(weather.dt_txt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).ToString("HH:mm")
@@ -32,35 +32,35 @@
     <tbody class="align-middle">
         <tr>
             <td id="temperature"><b>Temperature (&#8451;)</b></td>
-            @foreach (var weather in Model)
+            @foreach (var weather in Model.DayInfo)
             {
-                <td id="temperaturevalue">@(weather.main.temp)&#176</td>
+                <td id="temperaturevalue">@Math.Round(weather.main.temp)&#176</td>
             }
         </tr>
         <tr>
             <td id="feelslike"><b>Feels Like (&#8451;)</b></td>
-            @foreach (var weather in Model)
+            @foreach (var weather in Model.DayInfo)
             {
-                <td id="feelslikevalue">@weather.main.feels_like&#176</td>
+                <td id="feelslikevalue">@Math.Round(weather.main.feels_like)&#176</td>
             }
         </tr>
         <tr>
             <td><b>Pressure (mm)</b></td>
-            @foreach (var weather in Model)
+            @foreach (var weather in Model.DayInfo)
             {
                 <td>@weather.main.pressure</td>
             }
         </tr>
         <tr>
             <td><b>Humidity (%)</b></td>
-            @foreach (var weather in Model)
+            @foreach (var weather in Model.DayInfo)
             {
                 <td>@weather.main.humidity</td>
             }
         </tr>
         <tr>
         <td id="wind"><b>Wind (m/s)</b></td>
-            @foreach (var weather in Model)
+            @foreach (var weather in Model.DayInfo)
             {
                 <td title = "@GetWindDirection(@weather.wind.deg)">
                     <i class="fa-solid fa-arrow-up" style="transform: rotate(@GetArrowRotation(weather.wind.deg)); font-size: 14px; margin-right: 5px;"></i>
@@ -70,7 +70,7 @@
         </tr>
         <tr>
             <td><b/>Probability of precipitation (%)<b/></td>
-            @foreach (var weather in Model)
+            @foreach (var weather in Model.DayInfo)
             {
                 <td>@Convert.ToInt32(weather.pop * 100)</td>
             }
