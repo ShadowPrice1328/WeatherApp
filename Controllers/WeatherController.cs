@@ -9,16 +9,17 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace WeatherApp.Controllers 
 {
-    public class HomeController : Controller
+    public class WeatherController : Controller
     {
         private readonly IWeatherService _weatherService;
         private readonly IMemoryCache _memoryCache;
         private readonly TimeSpan _cacheDuration = TimeSpan.FromMinutes(30);
-        public HomeController(IWeatherService weatherService, IMemoryCache memoryCache)
+        public WeatherController(IWeatherService weatherService, IMemoryCache memoryCache)
         {
             _weatherService = weatherService;
             _memoryCache = memoryCache;
         }
+        [Route("/")]
         public IActionResult Index(string city = "Kyiv")
         {
             ViewData["City"] = city;

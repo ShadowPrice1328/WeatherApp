@@ -6,7 +6,7 @@
             @{
                 foreach (var weatherItem in Model.GroupedWeather)
                 {
-                    <form asp-action="ShowDetails" asp-controller="Home" method="post">
+                    <form asp-action="ShowDetails" asp-controller="Weather" method="post">
                         <input type="hidden" name="date" value="@weatherItem.Key.ToString("yyyy-MM-dd")" />
                         <input type="hidden" name="city" value="@Model.City"/>
 

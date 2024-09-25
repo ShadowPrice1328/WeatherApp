@@ -9,7 +9,7 @@
         <h2>Weather in @Model.City?.FirstToUpper() on <i>@Model.DayInfo?.Key.ToString("MMMM dd, yyyy")</i></h2>
     </div>
     <div class="col-auto">
-        <form asp-action="ChangeUnits" asp-controller="Home" method="post">
+        <form asp-action="ChangeUnits" asp-controller="Weather" method="post">
             <vc:units-change/>
         </form>
     </div>
