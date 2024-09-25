@@ -38,7 +38,7 @@ namespace WeatherApp.Controllers
                 {
                     try
                     {
-                        weather = await _weatherService.GetWeatherResponse(city);
+                        weather = await _weatherService.GetWeatherResponseAsync(city);
 
                         _memoryCache.Set(city, weather, _cacheDuration);
                     }
@@ -83,7 +83,7 @@ namespace WeatherApp.Controllers
 
             if (!_memoryCache.TryGetValue(city, out WeatherResponse? weather))
             {
-                weather = await _weatherService.GetWeatherResponse(city);
+                weather = await _weatherService.GetWeatherResponseAsync(city);
                 _memoryCache.Set(city, weather, _cacheDuration);
             }
 
