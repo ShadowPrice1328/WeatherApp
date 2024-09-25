@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IWeatherService, WeatherService>();
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 

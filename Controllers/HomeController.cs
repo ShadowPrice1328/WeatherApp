@@ -5,15 +5,19 @@ using System.Globalization;
 using Microsoft.VisualBasic;
 using ServiceContracts;
 using WeatherApp.ViewModels;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace WeatherApp.Controllers 
 {
     public class HomeController : Controller
     {
         private readonly IWeatherService _weatherService;
-        public HomeController(IWeatherService weatherService)
+        private readonly IMemoryCache _memoryCache;
+        private readonly TimeSpan _cacheDuration = TimeSpan.FromMinutes(30);
+        public HomeController(IWeatherService weatherService, IMemoryCache memoryCache)
         {
             _weatherService = weatherService;
+            _memoryCache = memoryCache;
         }
         public IActionResult Index(string city = "Kyiv")
         {
@@ -28,25 +32,26 @@ namespace WeatherApp.Controllers
             if (!string.IsNullOrEmpty(city))
             {
                 city = city.Trim();
-                //ViewData["City"] = city;
-                
-                WeatherResponse weather;
 
-                try
+                if (!_memoryCache.TryGetValue(city, out WeatherResponse? weather))
                 {
-                    weather = await _weatherService.GetWeatherResponse(city);
-                }
-                catch (Exception)
-                {   
-                    //To Do: fix it
-                    if (city == "Error")
+                    try
                     {
-                        return View("Error");
+                        weather = await _weatherService.GetWeatherResponse(city);
+
+                        _memoryCache.Set(city, weather, _cacheDuration);
                     }
-                    return View("NotFound");
+                    catch (Exception)
+                    {
+                        if (city == "Error")
+                        {
+                            return View("Error");
+                        }
+                        return View("NotFound");
+                    }
                 }
                 
-                var FiveDaysWeather = weather.list
+                var FiveDaysWeather = weather?.list
                     .GroupBy(item => DateTime.ParseExact(
                     item.dt_txt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).Date);
 
@@ -68,16 +73,20 @@ namespace WeatherApp.Controllers
         [HttpPost("{city}/{date:length(10)}")]
         public async Task<IActionResult> ShowDetails(string city, string date)
         {
-            if (string.IsNullOrEmpty(city) || 
+            if (string.IsNullOrEmpty(city) ||
                 !DateTime.TryParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None,
                 out DateTime parsedDate))
             {
                 return BadRequest("Invalid city or date format.");
             }
 
-            WeatherResponse weather = await _weatherService.GetWeatherResponse(city);
+            if (!_memoryCache.TryGetValue(city, out WeatherResponse? weather))
+            {
+                weather = await _weatherService.GetWeatherResponse(city);
+                _memoryCache.Set(city, weather, _cacheDuration);
+            }
 
-            var FiveDaysWeather = weather.list
+            var FiveDaysWeather = weather?.list
                 .GroupBy(item => DateTime.ParseExact(item.dt_txt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).Date);
 
             var weatherViewModel = new WeatherViewModel()
