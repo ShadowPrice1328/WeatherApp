@@ -5,7 +5,7 @@
 ngrok.exe
 
 # Configs
-Config/
+Config.cs
 
 # Logs
 Logs/

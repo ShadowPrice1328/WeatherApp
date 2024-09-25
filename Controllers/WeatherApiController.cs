@@ -104,21 +104,5 @@ namespace WeatherApp.Controllers
             
             return Ok(current);
         }
-
-        [HttpGet("header")]
-        public IActionResult AuthenticateViaHeader()
-        {
-            string? apiKey = Request.Headers[Constants.ApiKeyHeaderName];
-
-            if (string.IsNullOrWhiteSpace(apiKey))
-                return BadRequest();
-
-            bool isValid = _apiKeyValidation.IsValidApiKey(apiKey);
-
-            if (!isValid)
-                return Unauthorized();
-
-            return Ok();
-        }
     }
 }
